@@ -1,10 +1,13 @@
 //on page load -> generate game board;
-window.onload = function(){
+// window.onload = function(){
+//     console.log("Page Loaded")
+//     setRandomTileOrder(12);
+//     setTiles();
+// }
+window.onload =() => {
     console.log("Page Loaded")
-    setRandomTileOrder(12);
-    setTiles();
-}
-
+     setRandomTileOrder(12);
+     setTiles();
 //global variable
 
 var i = 0;
@@ -16,24 +19,37 @@ initiates game start on button press*/
 var startButton = document.getElementById("startGame")
 startButton.addEventListener("click", startGame);
 
-function startGame() {
+// function startGame() {
+//     tiles.forEach(tile => tile.addEventListener("click", displayTile));
+//     resetTiles();
+//     startButton.disabled = true;
+//      console.log(randomOrderArray);
+//     startTimer();
+// }
+const startGame = () => {
     tiles.forEach(tile => tile.addEventListener("click", displayTile));
     resetTiles();
     startButton.disabled = true;
      console.log(randomOrderArray);
     startTimer();
 }
-
 //end button stops the game
 document.getElementById('endGame').addEventListener("click", endGame);
 
 
-function endGame() {
-    function endTimer() {
+// function endGame() {
+//     function endTimer() {
+//         timeScore = document.getElementById("timer").innerText;
+//         console.log(timeScore);
+//         clearInterval(timer);
+//     }
+const endGame = () => {
+    const endTimer = () => {
         timeScore = document.getElementById("timer").innerText;
         console.log(timeScore);
         clearInterval(timer);
-    }
+}
+
     randomOrderArray= [];
     startButton.innerText = "New Game";
     startButton.disabled = false;
@@ -44,8 +60,22 @@ function endGame() {
 /* createRandom number function
 creates random number which will later be assigned an icon
 creates an array of 12 random numbers*/
-var randomOrderArray = [];
-function setRandomTileOrder(numberOfTiles) {
+// var randomOrderArray = [];
+// function setRandomTileOrder(numberOfTiles) {
+//     while (randomOrderArray.length < numberOfTiles) {
+//         var randomNum = Math.random();
+//         randomNum = randomNum * (numberOfTiles -1);
+//         randomNum = Math.round(randomNum) + 1;
+
+//         if (randomOrderArray.includes(randomNum)) {
+//             continue;
+//         } else {
+//             randomOrderArray.push(randomNum);
+//         }
+//     } 
+// }
+const randomOrderArray = [];
+const setRandomTileOrder = (numberOfTiles) => {
     while (randomOrderArray.length < numberOfTiles) {
         var randomNum = Math.random();
         randomNum = randomNum * (numberOfTiles -1);
@@ -58,15 +88,42 @@ function setRandomTileOrder(numberOfTiles) {
         }
     } 
 }
-
 //Set tiles variable for use throughout code
 var tiles = document.querySelectorAll(".gametile");
 
-function setTiles(){
+// function setTiles(){
+//     for(tile of tiles){
+//         tile.innerHTML = randomOrderArray[i];
+//         i++;
+//     //replace numerical values with icon pairs
+
+//     if (tile.innerText < 3) {
+//         tile.innerHTML = rocket;
+//         tile.setAttribute("icon", "rocket")
+//     } else if (tile.innerHTML < 5) {
+//         tile.innerHTML = bacteria;
+//         tile.setAttribute("icon", "bacteria")
+//     } else if (tile.innerHTML < 7) {
+//         tile.innerHTML = cocktail;
+//         tile.setAttribute("icon", "cocktail")
+//     } else if (tile.innerHTML < 9) {
+//         tile.innerHTML = football;
+//         tile.setAttribute("icon", "football")
+//     } else if (tile.innerHTML < 11) {
+//         tile.innerHTML = pizza;
+//         tile.setAttribute("icon", "pizza")
+//     } else if (tile.innerHTML < 13) {
+//         tile.innerHTML = kiwi;
+//         tile.setAttribute("icon", "kiwi")
+//     } else {
+//         console.log("Error: too many tiles");
+//     }
+// }
+// }
+const setTiles = () => {
     for(tile of tiles){
         tile.innerHTML = randomOrderArray[i];
         i++;
-    //replace numerical values with icon pairs
 
     if (tile.innerText < 3) {
         tile.innerHTML = rocket;
@@ -89,13 +146,13 @@ function setTiles(){
     } else {
         console.log("Error: too many tiles");
     }
+  }
 }
-}
-
 //Timer Function -> starts timer when game is started end when game is compvare or game is cancelled.
 var count;
 
-function startTimer() {
+// function startTimer() {
+const startTimer =() => {
     clearInterval(timer); //clears timer before timer starts. This fixes issue if timer is triggered again, when already running. 
     count = 0, timer = setInterval(function () {
         count = count++;
@@ -132,8 +189,8 @@ var tileIds =[];
 tiles.forEach(tile => tile.addEventListener("click", displayTile));
 var n = 0;
 
-function displayTile(e) {
-    
+// function displayTile(e) {
+const displayTile = (e) => {
     //reveal tile by changing bg color and changing font-size from 0 to 3em;
     this.classList.remove("hideTile");
     this.classList.add("displayTile");
@@ -154,7 +211,8 @@ function displayTile(e) {
     }
 };
 
-function checkMatch(tileIcons, tileIds,n){
+// function checkMatch(tileIcons, tileIds,n){
+const checkMatch = (tileIcons, tileIds,n) =>{
     console.log(n);
     console.log(n+1);
         if(tileIcons[n] !== tileIcons[n+1]){
@@ -179,13 +237,15 @@ function checkMatch(tileIcons, tileIds,n){
 
 
 //countClicks -> calculates number of user clicks -> needed to calculate score
-function countMoves(){
+// function countMoves(){
+const countMoves = () => {
     clicks = n;
     document.getElementById("clicks").firstChild.innerHTML = clicks;
 }
 
 //ClearTiles -> Clear tiles when new game is started;
-function clearTiles(){
+// function clearTiles(){
+const clearTiles = () => {
     for(var n = 0; n < tiles.length; n++){
         tiles[n].style.fontSize = "0em";
         tiles[n].style.backgroundColor = "#44445a";
@@ -200,7 +260,8 @@ if match icons remain displayed and correctly guessed tiles become disabled. */
 //compvareGAme -> When the number of correct answers == the number of cells the game can end.
 
 //calculateScore -> adds number of clicks and elapsed time to calculate score & displays score upon game compvarion. 
-function calculateScore(){
+// function calculateScore(){
+const calculateScore = () => {
     timeScore = parseInt(timeScore);
     var calculatedScore = (timeScore + clicks);
     console.log(calculatedScore);
@@ -212,9 +273,12 @@ function calculateScore(){
 
 var newRGB;
 
-function generateRGBVal() {
+// function generateRGBVal() {
 
-    function generateRandomColor() {
+//     function generateRandomColor() {
+const generateRGBVal = () => {
+
+    const generateRandomColor = () => {
         var r = Math.random();
         r = r * 255;
         r = Math.round(r);
@@ -234,7 +298,8 @@ function generateRGBVal() {
 // publish leaderboard;
 //use api to generate random icon or picture
 
-function resetTiles(){
+// function resetTiles(){
+const resetTiles = () => {
     for(tile of tiles){
         tile.style.backgroundColor ="#44445a";
         tile.removeAttribute("state");
@@ -244,4 +309,4 @@ function resetTiles(){
     }
 }
 
-
+}
